@@ -68,6 +68,13 @@ else()
   set(DISABLE_STATIC_BUILD TRUE  CACHE BOOL "Disable static build")
 endif(PACCURL_FOUND AND (NOT DISABLE_STATIC_BUILD))
 
+#translations
+file (STRINGS "po/LINGUAS" languages)
+foreach(lang IN LISTS languages)
+  message(${lang})
+  GETTEXT_PROCESS_PO_FILES(${lang} ALL INSTALL_DESTINATION share/locale PO_FILES po/${lang}/libpacman.po)
+endforeach(lang)
+
 install(TARGETS pacman DESTINATION lib)
 install(FILES pacman.h DESTINATION include)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pacman.pc DESTINATION lib/pkgconfig)

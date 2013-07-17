@@ -6,6 +6,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake_mo
 include (CheckIncludeFile)
 include (CheckIncludeFiles)
 include (CheckFunctionExists)
+include (GettextTranslate)
 
 string(TOLOWER ${CMAKE_PROJECT_NAME} CMAKE_PROJECT_NAME_LOWER)
 set (PACMAN_G2_VERSION 3.8.9)

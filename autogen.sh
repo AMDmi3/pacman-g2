@@ -11,24 +11,28 @@ import_pootle()
 		for i in $(/bin/ls $po_dir/pacman)
 		do
 			if [ -e $po_dir/pacman/$i/libpacman.po ]; then
-			cp $po_dir/pacman/$i/libpacman.po lib/libpacman/po/$i.po
-			if msgfmt -c --statistics -o lib/libpacman/po/$i.gmo lib/libpacman/po/$i.po; then
+			  if msgfmt -c --statistics -o /dev/null $po_dir/pacman/$i/libpacman.po; then
+				mkdir -p lib/libpacman/po/$i/
+				cp $po_dir/pacman/$i/libpacman.po lib/libpacman/po/$i/libpacman.po
 				echo $i >> lib/libpacman/po/LINGUAS
-			else
+			  else
 				echo "WARNING: lib/libpacman/po/$i.po would break your build!"
-			fi
+			  fi
 			fi
 			if [ -e $po_dir/pacman/$i/pacman-g2.po ]; then
-			cp $po_dir/pacman/$i/pacman-g2.po src/pacman-g2/po/$i.po
-			if msgfmt -c --statistics -o src/pacman-g2/po/$i.gmo src/pacman-g2/po/$i.po; then
+			  if msgfmt -c --statistics -o /dev/null $po_dir/pacman/$i/pacman-g2.po; then
+				mkdir -p $po_dir/pacman/$i/pacman-g2/po/$i/
+				cp $po_dir/pacman/$i/pacman-g2.po src/pacman-g2/po/$i/pacman-g2.po
 				echo $i >> src/pacman-g2/po/LINGUAS
-			else
+			  else
 				echo "WARNING: src/pacman-g2/po/$i.po would break your build!"
-			fi
+			  fi
 			fi
 			if [ -e $po_dir/pacman/$i/mans.po ]; then
-			cp $po_dir/pacman/$i/mans.po doc/po/$i.po
-			if ! msgfmt -c --statistics -o doc/po/$i.gmo doc/po/$i.po; then
+			  if msgfmt -c --statistics -o /dev/null $po_dir/pacman/$i/mans.po; then
+				mkdir -p doc/po/$i/
+				cp $po_dir/pacman/$i/mans.po doc/po/$i/mans.po
+			  else
 				echo "WARNING: doc/po/$i.po will break your build!"
 			fi
 			fi
@@ -36,21 +40,6 @@ import_pootle()
 	else
 		echo "WARNING: no po files will be used"
 	fi
-
-	# generate the pot files
-	for i in lib/libpacman/po src/pacman-g2/po
-	do
-		cd $i
-		mv Makevars Makevars.tmp
-		package=`pwd|sed 's|.*/\(.*\)/.*|\1|'`
-		cp /usr/bin/intltool-extract ./
-		intltool-update --pot --gettext-package=$package
-		rm intltool-extract
-		mv Makevars.tmp Makevars
-		cd - >/dev/null
-	done
-	# avoing having the Makevars file as modified ones
-	git update-index --refresh >/dev/null
 }
 
 cd `dirname $0`

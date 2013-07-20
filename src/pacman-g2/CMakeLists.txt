@@ -23,6 +23,13 @@ target_link_libraries(${CMAKE_PROJECT_NAME_LOWER} pacman ${M_LIB})
 
 execute_process(COMMAND ln -sf ./${CMAKE_PROJECT_NAME_LOWER} ./pacman
 		WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+		
+#translations
+file (STRINGS "po/LINGUAS" languages)
+foreach(lang IN LISTS languages)
+  message(${lang})
+  GETTEXT_PROCESS_PO_FILES(${lang} ALL INSTALL_DESTINATION share/locale PO_FILES po/${lang}/pacman-g2.po)
+endforeach(lang)
 
 install(TARGETS "${CMAKE_PROJECT_NAME_LOWER}"  DESTINATION bin)
 install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/pacman DESTINATION bin)

@@ -21,7 +21,7 @@ import_pootle()
 			fi
 			if [ -e $po_dir/pacman/$i/pacman-g2.po ]; then
 			  if msgfmt -c --statistics -o /dev/null $po_dir/pacman/$i/pacman-g2.po; then
-				mkdir -p $po_dir/pacman/$i/pacman-g2/po/$i/
+				mkdir -p src/pacman-g2/po/$i/
 				cp $po_dir/pacman/$i/pacman-g2.po src/pacman-g2/po/$i/pacman-g2.po
 				echo $i >> src/pacman-g2/po/LINGUAS
 			  else

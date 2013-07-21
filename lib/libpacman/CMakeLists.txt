@@ -71,7 +71,6 @@ endif(PACCURL_FOUND AND (NOT DISABLE_STATIC_BUILD))
 #translations
 file (STRINGS "po/LINGUAS" languages)
 foreach(lang IN LISTS languages)
-  message(${lang})
   GETTEXT_PROCESS_PO_FILES(${lang} ALL INSTALL_DESTINATION share/locale PO_FILES po/${lang}/libpacman.po)
 endforeach(lang)
 

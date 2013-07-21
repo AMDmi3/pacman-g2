@@ -27,7 +27,6 @@ execute_process(COMMAND ln -sf ./${CMAKE_PROJECT_NAME_LOWER} ./pacman
 #translations
 file (STRINGS "po/LINGUAS" languages)
 foreach(lang IN LISTS languages)
-  message(${lang})
   GETTEXT_PROCESS_PO_FILES(${lang} ALL INSTALL_DESTINATION share/locale PO_FILES po/${lang}/pacman-g2.po)
 endforeach(lang)
 

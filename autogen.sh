@@ -29,9 +29,8 @@ import_pootle()
 			  fi
 			fi
 			if [ -e $po_dir/pacman/$i/mans.po ]; then
-			  if msgfmt -c --statistics -o /dev/null $po_dir/pacman/$i/mans.po; then
-				mkdir -p doc/po/$i/
-				cp $po_dir/pacman/$i/mans.po doc/po/$i/mans.po
+			  if grep -Fq "$i" doc/local_mans_enabled.txt; then
+				cp $po_dir/pacman/$i/mans.po doc/po/$i.po
 			  else
 				echo "WARNING: doc/po/$i.po will break your build!"
 			fi

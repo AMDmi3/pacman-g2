@@ -29,10 +29,11 @@ import_pootle()
 			  fi
 			fi
 			if [ -e $po_dir/pacman/$i/mans.po ]; then
-			  if grep -Fq "$i" doc/local_mans_enabled.txt; then
+			  if grep -q "po4a_langs.*$i" doc/po4a.cfg; then
 				cp $po_dir/pacman/$i/mans.po doc/po/$i.po
+				echo $i >> doc/po/LINGUAS
 			  else
-				echo "WARNING: doc/po/$i.po will break your build!"
+				echo "WARNING: doc/po/$i.po not found in po4a.cfg"
 			fi
 			fi
 		done

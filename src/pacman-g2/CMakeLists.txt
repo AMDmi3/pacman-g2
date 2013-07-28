@@ -30,5 +30,10 @@ foreach(lang IN LISTS languages)
   GETTEXT_PROCESS_PO_FILES(${lang} ALL INSTALL_DESTINATION share/locale PO_FILES po/${lang}/pacman-g2.po)
 endforeach(lang)
 
+#translations
+if(HAS_ASCIIDOC)
+  ADD_SUBDIRECTORY(po)
+endif(HAS_ASCIIDOC)
+
 install(TARGETS "${CMAKE_PROJECT_NAME_LOWER}"  DESTINATION bin)
 install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/pacman DESTINATION bin)

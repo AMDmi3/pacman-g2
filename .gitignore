@@ -31,4 +31,5 @@ build
 .project
 .cproject
 *~
+*.user.*
 

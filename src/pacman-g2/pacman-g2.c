@@ -181,7 +181,7 @@ static void usage(int op, char *myname)
 static void version(void)
 {
 	printf("\n");
-	printf(" .--.                  Pacman-G2 v%s - libpacman v%s\n", PACKAGE_VERSION, PM_VERSION);
+	printf(" .--.                  Pacman-G2 v%s - libpacman v%s\n", PACKAGE_VERSION, PACMAN_G2_LIB_VERSION);
 	printf("/ _.-' .-.  .-.  .-.   Copyright (C) 2002-2010 Pacman-G2 Team\n");
 	printf("\\  '-. '-'  '-'  '-'   See /usr/share/doc/pacman-g2-%s/AUTHORS for more info.\n", PACKAGE_VERSION);
 	printf(" '--'                  \n");

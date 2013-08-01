@@ -70,10 +70,18 @@ endif(PACCURL_FOUND AND (NOT DISABLE_STATIC_BUILD))
 
 #translations
 if(HAS_ASCIIDOC)
-  ADD_SUBDIRECTORY(po)
+  add_subdirectory(po)
 endif(HAS_ASCIIDOC)
+
+if(HAS_DOXYGEN)
+  add_custom_command(TARGET pacman
+                   POST_BUILD
+                   COMMAND doxygen Doxyfile
+                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+endif(HAS_DOXYGEN)
 
 install(TARGETS pacman DESTINATION lib)
 install(FILES pacman.h DESTINATION include)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pacman.pc DESTINATION lib/pkgconfig)
+install(DIRECTORY ../../doc/man3 DESTINATION share/man/)
 

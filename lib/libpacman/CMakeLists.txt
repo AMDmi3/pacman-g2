@@ -48,7 +48,7 @@ endif(NOT PACCURL_FOUND)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D_LARGEFILE64_SOURCE")
 
 add_library(pacman SHARED ${LIBPACMAN_SOURCES})
-set_target_properties(pacman PROPERTIES SOVERSION 0.${PACMAN_G2_LIB_VERSION})
+set_target_properties(pacman PROPERTIES SOVERSION ${PACMAN_G2_LIB_VERSION})
 target_link_libraries(pacman ${LibArchive_LIBRARIES} ${CURL_LIBRARIES})
 
 

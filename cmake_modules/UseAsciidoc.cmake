@@ -40,6 +40,6 @@ macro(ASCIILOCALDOC2MAN _a2m_input _a2m_output _a2m_install_dir _lang)
    
    add_custom_target(${no_slash_dir}${_lang}${_a2m_output} ALL DEPENDS ${_manFile})
 
-   install(FILES {CMAKE_CURRENT_BINARY_DIR}/${_lang}/${_a2m_output} DESTINATION ${_a2m_install_dir})
+   install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${_lang}/${_a2m_output} DESTINATION ${_a2m_install_dir})
 
 endmacro(ASCIILOCALDOC2MAN _a2m_input _a2m_output _a2m_install_dir _lang)

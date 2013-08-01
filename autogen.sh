@@ -49,6 +49,8 @@ if [ "$1" == "--dist" ]; then
 	git archive --format=tar --prefix=pacman-g2-$ver/ HEAD | tar xf -
 	git log --no-merges |git name-rev --tags --stdin > pacman-g2-$ver/ChangeLog
 	cd pacman-g2-$ver
+	# copy in the po files
+	import_pootle
 	cd ..
 	tar czf pacman-g2-$ver.tar.gz pacman-g2-$ver
 	rm -rf pacman-g2-$ver
@@ -108,7 +110,4 @@ elif [ "$1" == "--gettext-only" ]; then
 	done
 	exit 0
 fi
-
-# copy in the po files
-import_pootle
 

@@ -78,10 +78,11 @@ if(HAS_DOXYGEN)
                    POST_BUILD
                    COMMAND doxygen Doxyfile
                    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+  install(DIRECTORY ../../doc/man3/ DESTINATION share/man/man3/)
 endif(HAS_DOXYGEN)
 
 install(TARGETS pacman DESTINATION lib)
 install(FILES pacman.h DESTINATION include)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pacman.pc DESTINATION lib/pkgconfig)
-install(DIRECTORY ../../doc/man3 DESTINATION share/man/)
+
 

@@ -301,7 +301,7 @@ int _pacman_downloadfiles_forreal(pmlist_t *servers, const char *localpath,
 			} else {
 				char output[PATH_MAX];
 				unsigned int j;
-                int filedone = 1;
+				int filedone = 1;
 				char *ptr;
 				struct stat st;
 				snprintf(output, PATH_MAX, "%s/%s.part", localpath, fn);
@@ -384,6 +384,14 @@ int _pacman_downloadfiles_forreal(pmlist_t *servers, const char *localpath,
                                     pm_errno = PM_ERR_CONNECT_FAILED;
                                     goto error;
                                 }
+                            }
+                            if(handle->nopassiveftp) {
+				 curl_easy_setopt(curlHandle, CURLOPT_FTPPORT, "-");			      
+			    }
+			    if(retc != CURLE_OK) {
+                                 _pacman_log(PM_LOG_WARNING, _("error setting active FTP mode\n"));
+                                 pm_errno = PM_ERR_CONNECT_FAILED;
+                                 goto error;
                             }
                         }
                     }
